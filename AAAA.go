@@ -21,9 +21,10 @@ func (a AAAA) ServeDNS(ctx context.Context, w dns.ResponseWriter, r *dns.Msg) (i
 
 	m := new(dns.Msg)
 	m.SetReply(r)
-	hdr := dns.RR_Header{Name: r.Question[0].Name, Ttl: 8482, Class: dns.ClassINET, Rrtype: dns.TypeHINFO}
-	m.Answer = []dns.RR{&dns.HINFO{Hdr: hdr, Cpu: "AAAA obsoleted", Os: "See RFC 8482"}}
-
+	
+	//hdr := dns.RR_Header{Name: r.Question[0].Name, Ttl: 8482, Class: dns.ClassINET, Rrtype: dns.TypeHINFO}
+	//m.Answer = []dns.RR{&dns.HINFO{Hdr: hdr, Cpu: "AAAA obsoleted", Os: "See RFC 8482"}}
+    m.Rcode=5
 	w.WriteMsg(m)
 	return 0, nil
 }
